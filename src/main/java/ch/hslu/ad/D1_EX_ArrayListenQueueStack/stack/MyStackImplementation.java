@@ -31,6 +31,13 @@ public class MyStackImplementation<T> implements MyStack<T>{
         return value;
     }
 
+    public void empty(){
+        for (int i = 0; i < top; i++) {
+            data[i] = null;
+        }
+        top = 0;
+    }
+
     public int size(){
         return data.length;
     }
