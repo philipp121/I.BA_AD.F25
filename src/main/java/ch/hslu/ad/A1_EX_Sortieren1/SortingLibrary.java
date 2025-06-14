@@ -72,9 +72,9 @@ public class SortingLibrary {
         long start = System.nanoTime();
         int delay = 10;
         int amountOfCompare = 0;
-        for (int i = 0; i < a.length; i++){
+        for (int i = 0; i < a.length - 1; i++){
             int minIndex = i;
-            for (int j = i; j < a.length; j++){
+            for (int j = i + 1; j < a.length; j++){
                 amountOfCompare++;
                 if (a[j] < a[minIndex]) {
                     minIndex = j;
@@ -82,12 +82,9 @@ public class SortingLibrary {
                 SortingAnimation.instance().showArray(a, delay, j);
             }
             amountOfCompare++;
-            if (minIndex != i) {
                 int temp = a[i];
                 a[i] = a[minIndex];
                 a[minIndex] = temp;
-
-            }
         }
         SortingAnimation.instance().showArray(a, delay);
         long end = System.nanoTime();

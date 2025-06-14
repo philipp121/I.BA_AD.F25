@@ -1,17 +1,19 @@
-package ch.hslu.ad.A1_EX_Sortieren1;
+package ch.hslu.ad.A2_EX_Sortieren2;
 
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SortingMain {
+public class Main {
 
-    /** 
+    /**
      * Liefert ein Array mit den Zahlen 1 bis size in zufälliger Reihenfolge.
-     * 
+     *
      * @param size die Anzahl der Zahlen
-     * 
+     *
      */
     static int[] getShuffledNumbers(int size) {
         List<Integer> numbers = IntStream.range(1, size + 1).boxed().collect(Collectors.toList());
@@ -21,7 +23,7 @@ public class SortingMain {
 
     /**
      * Liefert ein Array mit den Zahlen 1 bis size in aufsteigender Reihenfolge.
-     * 
+     *
      * @param size die Anzahl der Zahlen
      */
     static int[] getAscendingNumbers(int size) {
@@ -30,18 +32,35 @@ public class SortingMain {
 
     /**
      * Liefert ein Array mit den Zahlen 1 bis size in absteigender Reihenfolge.
-     * 
+     *
      * @param size die Anzahl der Zahlen
      */
     static int[] getDescendingNumbers(int size) {
         return IntStream.range(1, size + 1).map(i -> size - i + 1).toArray();
     }
 
-    public static void main(String[] args) {
-        // Beispiel: Zahlen von 1 bis 50 in zufälliger Reihenfolge
-        int[] numbers = getShuffledNumbers(50);
-        //SortingLibrary.insertionSort(numbers);
-        //SortingLibrary.selectionSort(numbers);
-        SortingLibrary.bubbleSort(numbers);
+    static int[] heapSort(FixedSizeHeap fixedSizeHeap){
+        int n = fixedSizeHeap.size();
+        int[] sorted = new int[n];
+        for (int i = n - 1; i >= 0; i--){
+            sorted[i] = fixedSizeHeap.extractMax();
+        }
+        return sorted;
     }
+
+    public static void main(String[] args) {
+        int[] numbers = getShuffledNumbers(50);
+        //SortingLibrary.quickSort(numbers, true);
+
+        FixedSizeHeap fixedSizeHeap = new FixedSizeHeap(50);
+        for (int number : numbers){
+            fixedSizeHeap.add(number);
+            System.out.println(fixedSizeHeap);
+        }
+        int[] sorted = heapSort(fixedSizeHeap);
+        System.out.println(Arrays.toString(sorted));
+    }
+
+
+
 }
